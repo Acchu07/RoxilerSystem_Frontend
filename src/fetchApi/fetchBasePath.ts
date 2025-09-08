@@ -1,12 +1,16 @@
-export async function fetchBasePath() {
-    const url = import.meta.env.VITE_BASE_URL;
-    console.log(url);
-    try {
-        const response = await fetch(url);
-        const result = await response.json();
-        console.log(result);
-    } catch (error) {
-        console.error(error);
+interface fetchData {
+    message: string;
+    role?: "ADMIN" | "USER" | "STORE_OWNER" | null;
+    data?: any // List out types i am returning from the API - fix later
+}
+
+export async function fetchURL(url:string,RequestOptions:RequestInit) {
+
+    const response = await fetch(url, RequestOptions);
+    const data: fetchData = await response.json();
+    if(!response.ok){
+        throw new Error(data.message);
     }
+    return data
 }
 

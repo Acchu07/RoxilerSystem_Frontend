@@ -9,7 +9,6 @@ type FormType = "login" | "register"
 function AuthPage() {
     const [currentForm, setCurrentForm] = useState<FormType>("login")
 
-
     return (
         <>
             <nav className="flex justify-between m-10 p-10">
@@ -17,7 +16,7 @@ function AuthPage() {
                 <button className={`btn btn-xl ${currentForm === 'register'? "text-success":"btn-soft"}`} onClick={() => setCurrentForm("register")}>Register</button>
             </nav>
             <main className="flex justify-center">
-                {currentForm === 'login' && <LoginForm/>}
+                    {currentForm === 'login' && <LoginForm/>}
                 {currentForm === 'register' && <RegisterForm/>}
             </main>
 

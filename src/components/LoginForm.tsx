@@ -1,5 +1,9 @@
 import {useForm} from "react-hook-form"
-import {validationValues} from "../config.ts"
+import {authAPI, validationValues} from "../config.ts"
+import {UserAuthContext} from "../context/UserAuthContext.tsx";
+import {useContext, useState} from "react";
+import {fetchURL} from "../fetchApi/fetchBasePath.ts";
+import {AllErrors} from "./Errors.tsx";
 
 interface IFormInput {
     email: string;
@@ -7,15 +11,47 @@ interface IFormInput {
     confirmPassword: string;
 }
 
-function LoginForm() {
+function LoginForm () {
+    const contextIsUserLogged = useContext(UserAuthContext);
+    const [errorsPresent, setErrorsPresent] = useState<string | null>(null);
+    if (!contextIsUserLogged) throw new Error("UserAuthContext not provided");
+    const { setIsUserLoggedIn } = contextIsUserLogged;
+
+
     const {
         register,
         handleSubmit,
         formState: {errors}
     } = useForm<IFormInput>();
 
-    const onSubmit = (data: IFormInput) => {
-        alert(JSON.stringify(data));
+    const onSubmit = async (data: IFormInput) => {
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            credentials: 'include',
+        }
+        try{
+            const fetchOutcome = await fetchURL(authAPI.login, requestOptions)
+            if(!fetchOutcome.role){
+                throw new Error("Role not found")
+            }
+            setIsUserLoggedIn({
+                role: fetchOutcome.role,
+                isLoggedIn: true,
+                data: null
+            })
+        }
+        catch (error) {
+            if(error instanceof Error) {
+                setErrorsPresent(error.message)
+            }
+            else {
+                console.log(error);
+            }
+
+        }
+
     };
 
     return (
@@ -57,7 +93,8 @@ function LoginForm() {
                     )}
                 </label>
             </section>
-            <button className={`btn btn-xl `} disabled={errors?.email || errors?.password ? true : false} type="submit"> LogIn </button>
+            <button className={`btn btn-xl `} disabled={errors?.email || errors?.password ? true : false} type="submit"> Login </button>
+            {errorsPresent && <AllErrors errors={errorsPresent} setErrors={setErrorsPresent}/>}
         </form>
     );
 }
