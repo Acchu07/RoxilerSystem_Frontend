@@ -85,6 +85,7 @@ function RegisterForm() {
 
 // Individual input elements could be a reusuable component - TO check later?
     return (
+        <section className="flex justify-center m-10 p-10">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <section className="flex gap-4">
                 <label className="floating-label">
@@ -167,9 +168,10 @@ function RegisterForm() {
                     )}
                 </label>
             </section>
-            <button className={`btn btn-xl `} type="submit" disabled={isButtonEnabled}> Register</button>
+            <button className={`btn btn-xl`} type="submit" disabled={isButtonEnabled}> Register</button>
             {errorsPresent && <AllErrors errors={errorsPresent} setErrors={setErrorsPresent}/>}
         </form>
+        </section>
     );
 }
 
