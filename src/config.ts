@@ -18,4 +18,5 @@ export const authAPI = {
     logout: `${baseURL}/api/v1/auth/logout`,
     dashboard: `${baseURL}/api/v1/dashboard`,
     getAllUsers: `${baseURL}/api/v1/users`,
+    getAllStores: `${baseURL}/api/v1/store`,
 }

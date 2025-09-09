@@ -4,21 +4,21 @@ import {fetchURL} from "../fetchApi/fetchBasePath.ts";
 import {AllErrors} from "./Errors.tsx";
 import {ViewTable} from "./View.tsx";
 
-export function ViewUser() {
+export function ViewStore() {
     const [userData, setUserData] = useState<any[]>([]);
     const [errorsPresent, setErrorsPresent] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetchURL(authAPI.getAllUsers, {
+                const response = await fetchURL(authAPI.getAllStores, {
                     method: 'GET',
                     credentials: 'include',
                 });
                 setUserData(response.data);
-                // console.log(
-                //     response.data
-                // )
+                console.log(
+                    response.data
+                )
             } catch (error) {
                 if (error instanceof Error) {
                     setErrorsPresent(error.message)
