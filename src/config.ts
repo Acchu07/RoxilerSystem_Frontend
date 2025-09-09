@@ -6,7 +6,7 @@ export const validationValues = {
     maxLengthPassword: 16,
     minLengthName: 2,
     maxLengthName: 16,
-    minLenghtAddress: 2,
+    minLengthAddress: 2,
     maxLengthAddress: 16,
 }
 
