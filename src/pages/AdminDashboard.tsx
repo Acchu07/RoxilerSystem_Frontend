@@ -2,6 +2,7 @@ import {useContext, useState} from "react";
 import {UserAuthContext} from "../context/UserAuthContext.tsx";
 import {Dashboard} from "../components/Dashboard.tsx";
 import RegisterForm from "../components/RegisterForm.tsx";
+import {ViewUser} from "../components/ViewUser.tsx";
 
 
 enum onlyOneIsOpenNumber {
@@ -33,7 +34,7 @@ export function AdminDashboard() {
                 <section className="flex-1">
                     {onlyOneIsOpen === 0 && <Dashboard data={isUserLoggedIn}/>}
                     {onlyOneIsOpen === 1 && <RegisterForm/>}
-                    {onlyOneIsOpen === 2 && <p>View User</p>}
+                    {onlyOneIsOpen === 2 && <ViewUser/>}
                 </section>
             </main>
         </>

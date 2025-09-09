@@ -17,4 +17,5 @@ export const authAPI = {
     register: `${baseURL}/api/v1/auth/register`,
     logout: `${baseURL}/api/v1/auth/logout`,
     dashboard: `${baseURL}/api/v1/dashboard`,
+    getAllUsers: `${baseURL}/api/v1/users`,
 }
