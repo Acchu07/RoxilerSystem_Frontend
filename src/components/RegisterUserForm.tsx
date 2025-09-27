@@ -1,10 +1,11 @@
 import {authAPI, validationValues} from "../config.ts";
 import {AllErrors} from "./Errors.tsx";
 import type {SubmitHandler} from "react-hook-form";
-import type {fetchData} from "../fetchApi/fetchBasePath.ts";
 import {useForm} from "react-hook-form";
-import {useRef, useState} from "react";
+import type {fetchData} from "../fetchApi/fetchBasePath.ts";
 import {fetchURL} from "../fetchApi/fetchBasePath.ts";
+import {useContext, useRef, useState} from "react";
+import {UserAuthContext} from "../context/UserAuthContext.tsx";
 
 
 interface IFormInput {
@@ -13,6 +14,7 @@ interface IFormInput {
     email: string;
     password: string;
     confirmPassword: string;
+    role?: string;
 }
 
 interface registrationSuccess extends fetchData {
@@ -23,11 +25,15 @@ interface registrationSuccess extends fetchData {
     }
 }
 
-function RegisterForm() {
+function RegisterUserForm() {
+    const context = useContext(UserAuthContext);
+    if (!context) throw new Error("UserAuthContext not provided");
+    const {isUserLoggedIn} = context;
+
     const [errorsPresent, setErrorsPresent] = useState<string | null>(null);
     const [notification, setNotification] = useState<registrationSuccess | null>(null);
     // Need Is Loading to prevent multiple clicks on register and login button
-    let timerRef = useRef<number | null>(null);
+    const timerRef = useRef<number | null>(null);
     const {
         register,
         handleSubmit,
@@ -125,7 +131,7 @@ function RegisterForm() {
                     {errors?.address?.type === "minLength" &&
                         <p className="text-error"> MinLength is {validationValues.minLengthAddress}</p>}
                     {errors?.address?.type === "maxLength" &&
-                        <p className="text-error"> MinLength is {validationValues.maxLengthAddress}</p>}
+                        <p className="text-error"> MaxLength is {validationValues.maxLengthAddress}</p>}
                 </label>
             </section>
 
@@ -168,6 +174,16 @@ function RegisterForm() {
                     )}
                 </label>
             </section>
+
+            {isUserLoggedIn.role === 'ADMIN' && <section className="gap-4">
+
+                    <span>User Role</span>
+                    <select className="select select-success" {...register("role", {required: true})}>
+                        <option value="USER">USER</option>
+                        <option value="STORE_OWNER">STORE OWNER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+            </section>}
             <button className={`btn btn-xl`} type="submit" disabled={isButtonEnabled}> Register</button>
             {errorsPresent && <AllErrors errors={errorsPresent} setErrors={setErrorsPresent}/>}
         </form>
@@ -175,4 +191,4 @@ function RegisterForm() {
     );
 }
 
-export default RegisterForm
+export default RegisterUserForm

@@ -32,7 +32,7 @@ export function ViewStore() {
 
     return (
         <div className="flex w-full flex-col">
-            <p className="text-3xl p-2 m-2">View Users</p>
+            <p className="text-3xl p-2 m-2">View Store</p>
             <div className="divider"></div>
             {!userData && <p>Fetching Data</p>}
             {userData && <ViewTable userData={userData}/>}

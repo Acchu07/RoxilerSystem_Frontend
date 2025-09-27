@@ -1,5 +1,5 @@
 import LoginForm from "../components/LoginForm.tsx";
-import RegisterForm from "../components/RegisterForm.tsx";
+import RegisterUserForm from "../components/RegisterUserForm.tsx";
 import {useState} from "react";
 
 
@@ -17,7 +17,7 @@ function AuthPage() {
             </nav>
             <main className="flex justify-center">
                     {currentForm === 'login' && <LoginForm/>}
-                {currentForm === 'register' && <RegisterForm/>}
+                {currentForm === 'register' && <RegisterUserForm/>}
             </main>
 
         </>
