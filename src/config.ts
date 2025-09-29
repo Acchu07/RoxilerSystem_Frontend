@@ -19,4 +19,9 @@ export const authAPI = {
     dashboard: `${baseURL}/api/v1/dashboard`,
     getAllUsers: `${baseURL}/api/v1/users`,
     getAllStores: `${baseURL}/api/v1/store`,
+    createStore: `${baseURL}/api/v1/store/`,
+}
+
+export const tempFixURLS = {
+    NoStoreOwners: `${baseURL}/api/v1/store/storelessOwner`,
 }
