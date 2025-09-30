@@ -28,6 +28,7 @@ export function AdminDashboard() {
     return (
         <>
             <main className="flex flex-row gap-4 h-screen">
+                {/*Make a reusuable navbar which accepts parameters and builds navbar dynamically*/}
                 <nav className="h-full">
                     <ul className="menu bg-base-200 rounded-box w-56 h-full">
                         <li className={`p-2 m-2 ${onlyOneIsOpen === 0 ? 'bg-blue-500' : ''}`}

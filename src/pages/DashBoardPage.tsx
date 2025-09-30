@@ -3,7 +3,7 @@ import {UserAuthContext} from "../context/UserAuthContext.tsx";
 import {AllErrors} from "../components/Errors.tsx";
 import {AdminDashboard} from "./AdminDashboard.tsx";
 import {StoreOwnerDashboard} from "../components/StoreOwnerDashboard.tsx";
-import {UserDashboard} from "../components/UserDashboard.tsx";
+import {UserDashboard} from "./UserDashboard.tsx";
 import {fetchURL} from "../fetchApi/fetchBasePath.ts";
 import {authAPI} from "../config.ts";
 
@@ -30,6 +30,7 @@ export default function DashBoardPage() {
                     })
                 }
             }
+
             fetchData()
         }
 

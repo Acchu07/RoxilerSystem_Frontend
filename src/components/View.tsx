@@ -1,5 +1,4 @@
-
-export function ViewTable({userData}: { userData: any}) {
+export function ViewTable({userData}: { userData: any }) {
     const isAdmin = userData[0]?.role ?? false;
     return (<div className="overflow-x-auto">
         <table className="table">
